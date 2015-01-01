@@ -1,0 +1,26 @@
+{
+    "name": "emcconville/point-reduction-algorithms",
+    "type": "library",
+    "description": "A collection of algorithms for reducing the number of points in polyline",
+    "keywords": ["polygon", "polyline"],
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Eric McConville",
+            "email": "emcconville@emcconville.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*",
+        "squizlabs/php_codesniffer": "2.1.*"
+    },
+    "autoload" : {
+      "psr-4" : {
+        "PointReduction\\" : "src",
+        "PointReduction\\Test\\" : "tests"
+      }
+    }
+}
