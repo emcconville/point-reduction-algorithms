@@ -12,4 +12,4 @@ before_script:
 script: phpunit
 
 after_success:
-  - vendor/bin/coveralls -v
+  - vendor/bin/coveralls
