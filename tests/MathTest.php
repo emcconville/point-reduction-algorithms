@@ -1,6 +1,7 @@
 <?php
 
 use PointReduction\Common\Math,
+    PointReduction\Common\Line,
     PointReduction\Common\Point;
 
 
@@ -27,8 +28,7 @@ class MathTest extends PHPUnit_Framework_TestCase
     {
         $actual = Math::shortestDistanceToSegment(
             new Point(4, 3),
-            new Point(2, 4),
-            new Point(4, 4)
+            new Line(new Point(2, 4), new Point(4, 4))
         );
         $this->assertEquals(1.0, $actual);
     }

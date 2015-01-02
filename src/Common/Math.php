@@ -8,8 +8,10 @@ class Math
     {
         return pow($head->x - $tail->x, 2) + pow($head->y - $tail->y, 2);
     }
-    static public function shortestDistanceToSegment( Point $p, Point $h, Point $t )
+    static public function shortestDistanceToSegment( Point $p, Line $l )
     {
+        $h = $l->head;
+        $t = $l->tail;
         $return = 0.0;
         $length = self::distanceBetweenPoints($h, $t);
         if ($length == 0)

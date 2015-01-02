@@ -1,7 +1,8 @@
 <?php
 
 namespace PointReduction\Algorithms;
-use PointReduction\Common\Math;
+use PointReduction\Common\Math,
+    PointReduction\Common\Line;
 
 class RamerDouglasPeucker
 {
@@ -14,8 +15,7 @@ class RamerDouglasPeucker
         {
             $distance = Math::shortestDistanceToSegment(
                 $points[$i],
-                $points[0],
-                $points[$pointsEnd]
+                new Line($points[0], $points[$pointsEnd])
             );
             if ( $distance > $distanceMax ) {
                 $index = $i;
