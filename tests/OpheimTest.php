@@ -1,14 +1,14 @@
 <?php
 
-use PointReduction\Common\Point; //,
-//    PointReduction\Algorithms\RamerDouglasPeucker as PRA;
+use PointReduction\Common\Point;
 
-class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
+class OpheimTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
-     * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
+     * @covers PointReduction\Algorithms\Opheim::apply
+     * @covers PointReduction\Algorithms\Opheim::_lastPoint
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
      */
@@ -24,11 +24,19 @@ class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\RamerDouglasPeucker::apply($givenPoints, 25);
+        $reducedPoints = PointReduction\Algorithms\Opheim::apply($givenPoints, [75, 75]);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[4], $reducedPoints[2]);
-        $this->assertEquals($givenPoints[6], $reducedPoints[3]);
-        $this->assertEquals($givenPoints[7], $reducedPoints[4]);
+        $this->assertEquals($givenPoints[7], $reducedPoints[3]);
+    }
+    /**
+     * @test
+     * @covers PointReduction\Algorithms\Opheim::apply
+     * @expectedException PointReduction\Algorithms\Exception
+     */
+    public function testApplyBadParameter()
+    {
+        PointReduction\Algorithms\Opheim::apply(array(), 75);
     }
 }

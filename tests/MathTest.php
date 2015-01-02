@@ -47,4 +47,19 @@ class MathTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals(0.0, $actual);
     }
+
+    /**
+     * @test
+     * @smoke
+     * @covers PointReduction\Common\Math::shortestDistanceToSegment
+     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     */
+    public function testShortestDistanceToEmptyLine()
+    {
+        $actual = Math::shortestDistanceToSegment(
+            new Point(3, 4),
+            new Line(new Point(4, 4), new Point(4, 4))
+        );
+        $this->assertEquals(1.0, $actual);
+    }
 }
