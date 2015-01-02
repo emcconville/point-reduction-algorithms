@@ -12,11 +12,11 @@
   <testsuites>
     <testsuite name="Point Reduction Algorithms">
       <directory suffix=".php">./tests/</directory>
-      <filter>
-        <blacklist>
-          <directory>./vendor</directory>
-        </blacklist>
-      </filter>  
     </testsuite>
+    <filter>
+      <blacklist>
+        <directory suffix=".php">./vendor</directory>
+      </blacklist>
+    </filter>
   </testsuites>
 </phpunit>
