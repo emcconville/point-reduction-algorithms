@@ -26,11 +26,7 @@ class Opheim implements Protocol
             ) {
                 $out++;
             }
-            foreach ( range($key+1, $out-1) as $i ) {
-                unset($points[$i]);
-            }
-            // Re-index array
-            $points = array_values($points);
+            array_splice($points,$key+1,$out-1);
             $key++;
         }
         return $points;

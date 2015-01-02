@@ -27,8 +27,9 @@ class OpheimTest extends PHPUnit_Framework_TestCase
         $reducedPoints = PointReduction\Algorithms\Opheim::apply($givenPoints, [75, 75]);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
-        $this->assertEquals($givenPoints[4], $reducedPoints[2]);
-        $this->assertEquals($givenPoints[7], $reducedPoints[3]);
+        $this->assertEquals($givenPoints[5], $reducedPoints[2]);
+        $this->assertEquals($givenPoints[6], $reducedPoints[3]);
+        $this->assertEquals($givenPoints[7], $reducedPoints[4]);
     }
     /**
      * @test
