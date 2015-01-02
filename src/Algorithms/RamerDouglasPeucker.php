@@ -4,7 +4,7 @@ namespace PointReduction\Algorithms;
 use PointReduction\Common\Math,
     PointReduction\Common\Line;
 
-class RamerDouglasPeucker
+class RamerDouglasPeucker implements Protocol
 {
     static public function apply( $points, $epsilon )
     {

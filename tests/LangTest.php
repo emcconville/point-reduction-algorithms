@@ -1,13 +1,12 @@
 <?php
 
-use PointReduction\Common\Point; //,
-//    PointReduction\Algorithms\RamerDouglasPeucker as PRA;
+use PointReduction\Common\Point;
 
-class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
+class LangTest extends PHPUnit_Framework_TestCase
 {
     /**
    * @test
-   * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
+   * @covers PointReduction\Algorithms\Lang::apply
    */
     public function testApply()
     {
@@ -21,10 +20,10 @@ class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\RamerDouglasPeucker::apply($givenPoints, 25);
+        $reducedPoints = PointReduction\Algorithms\Lang::apply($givenPoints, 25);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
-        $this->assertEquals($givenPoints[4], $reducedPoints[2]);
+        $this->assertEquals($givenPoints[5], $reducedPoints[2]);
         $this->assertEquals($givenPoints[6], $reducedPoints[3]);
         $this->assertEquals($givenPoints[7], $reducedPoints[4]);
     }
