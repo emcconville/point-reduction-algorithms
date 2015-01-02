@@ -12,17 +12,19 @@ class Math
     {
         $return = 0.0;
         $length = self::distanceBetweenPoints($h, $t);
-        if ($length == 0) { return sqrt(self::distanceBetweenPoints($p, $h)); 
+        if ($length == 0)
+        {
+            return sqrt(self::distanceBetweenPoints($p, $h));
         }
-        $d = (
-          ( $p->x - $h->x ) * ( $t->x - $h->x )
-          + ($p->y - $h->y ) * ( $t->y - $h->y )
-         ) / $length;
-        if ( $d < 0 ) { $return = self::distanceBetweenPoints($p, $h); 
-        }
-        elseif ( $d > 1 ) { $return = self::distanceBetweenPoints($p, $t); 
-        }
-        else {
+        $d  = ( $p->x - $h->x ) * ( $t->x - $h->x );
+        $d += ( $p->y - $h->y ) * ( $t->y - $h->y );
+        $d /= $length;
+        if ( $d < 0 )
+        {
+            $return = self::distanceBetweenPoints($p, $h);
+        } elseif ( $d > 1 ) {
+            $return = self::distanceBetweenPoints($p, $t);
+        } else {
             $return = self::distanceBetweenPoints(
                 $p,
                 new Point(
