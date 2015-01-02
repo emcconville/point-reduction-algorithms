@@ -14,7 +14,7 @@ class Opheim implements Protocol
             // Radial tolerance
             $r = (double)array_pop($tolerance);
         } else {
-            throw new \Exception("Opheim requires a pair of tolerances.");
+            throw new Exception("Opheim requires a pair of tolerances.");
         }
         $key = 0;
         while ( $key < self::_lastPoint($points, -3) ) {
@@ -22,7 +22,7 @@ class Opheim implements Protocol
             $out = $key + 2;
             while ( $out < count($points)
                 && Math::shortestDistanceToSegment($points[$out], $line) < $p
-                && Math::distanceBetweenPoints($points[$key], $points[$out]) < $r
+                && sqrt(Math::distanceBetweenPoints($points[$key], $points[$out])) < $r
             ) {
                 $out++;
             }
