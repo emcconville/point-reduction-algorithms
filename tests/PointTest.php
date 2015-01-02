@@ -6,10 +6,10 @@ use PointReduction\Common\Point,
 class PointTest extends PHPUnit_Framework_TestCase
 {
     /**
-   * @test
-   * @smoke
-   * @covers \PointReduction\Common\Point::__construct
-   */
+     * @test
+     * @smoke
+     * @covers \PointReduction\Common\Point::__construct
+     */
     public function testConstruct()
     {
         $point = new Point(3.4, 6.8);

@@ -5,9 +5,10 @@ use PointReduction\Common\Point;
 class LangTest extends PHPUnit_Framework_TestCase
 {
     /**
-   * @test
-   * @covers PointReduction\Algorithms\Lang::apply
-   */
+     * @test
+     * @covers PointReduction\Algorithms\Protocol::apply
+     * @covers PointReduction\Algorithms\Lang::apply
+     */
     public function testApply()
     {
         $givenPoints = array(

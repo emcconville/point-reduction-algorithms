@@ -6,9 +6,10 @@ use PointReduction\Common\Point; //,
 class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
 {
     /**
-   * @test
-   * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
-   */
+     * @test
+     * @covers PointReduction\Algorithms\Protocol::apply
+     * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
+     */
     public function testApply()
     {
         $givenPoints = array(
