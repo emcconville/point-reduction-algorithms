@@ -8,9 +8,9 @@ class LangTest extends PHPUnit_Framework_TestCase
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
      * @covers PointReduction\Algorithms\Lang::apply
-     * @covers PointReduction\Algorithms\Lang::_lastPoint
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Common\Math::lastKey
      */
     public function testApply()
     {

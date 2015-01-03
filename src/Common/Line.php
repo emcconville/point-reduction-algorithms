@@ -48,6 +48,7 @@ class Line
      *
      * @param PointReduction\Common\Point $head Starting point of line
      * @param PointReduction\Common\Point $tail Ending point of line
+     *
      * @return PointReduction\Common\Line
      */
     public function __construct(Point $head, Point $tail)

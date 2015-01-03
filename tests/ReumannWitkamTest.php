@@ -2,15 +2,15 @@
 
 use PointReduction\Common\Point;
 
-class RemannWitkamTest extends PHPUnit_Framework_TestCase
+class ReumannWitkamTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
-     * @covers PointReduction\Algorithms\Opheim::apply
-     * @covers PointReduction\Algorithms\Opheim::_lastPoint
+     * @covers PointReduction\Algorithms\ReumannWitkam::apply
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Common\Math::lastKey
      */
     public function testApply()
     {
@@ -24,7 +24,7 @@ class RemannWitkamTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\Opheim::apply($givenPoints, [75, 75]);
+        $reducedPoints = PointReduction\Algorithms\ReumannWitkam::apply($givenPoints, 45);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);
