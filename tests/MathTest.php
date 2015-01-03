@@ -1,12 +1,46 @@
 <?php
+/**
+ * This file is part of Point Reduction Algorithms library.
+ * 
+ * PHP Version 5.4
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage MathTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 
 use PointReduction\Common\Math,
     PointReduction\Common\Line,
     PointReduction\Common\Point;
 
-
+/**
+ * PHPUnit test for Math object
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage MathTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 class MathTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @test
+     * @smoke
+     * @covers PointReduction\Common\Math::areaOfTriangle
+     */
+    public function testAreaOfTriangle()
+    {
+        $a = new Point(0, 0);
+        $b = new Point(0, 9);
+        $c = new Point(6, 0);
+        $area = Math::areaOfTriangle($a, $b, $c);
+        $this->assertEquals(27, $area);
+    }
     /**
      * @test
      * @smoke

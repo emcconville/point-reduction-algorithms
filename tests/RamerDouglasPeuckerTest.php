@@ -1,8 +1,29 @@
 <?php
+/**
+ * This file is part of Point Reduction Algorithms library.
+ * 
+ * PHP Version 5.4
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage RamerDouglasPeuckerTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 
-use PointReduction\Common\Point; //,
-//    PointReduction\Algorithms\RamerDouglasPeucker as PRA;
+use PointReduction\Common\Point;
 
+/**
+ * PHPUnit test for Ramer-Douglas-Peucker algorithm
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage RamerDouglasPeuckerTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
 {
     /**

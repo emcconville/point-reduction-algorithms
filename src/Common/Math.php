@@ -17,7 +17,7 @@
  *
  * Math file
  *
- * Collection of commonly used meth functions to be used across algorithm
+ * Collection of commonly used math functions to be used across algorithm
  * methods. Helper & compatibility methods will also be stored here.
  *
  * PHP Version 5.4
@@ -26,7 +26,7 @@
  * @package    Common
  * @subpackage Math
  * @author     E. McConville <emcconville@emcconville.com>
- * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
@@ -45,14 +45,30 @@ namespace PointReduction\Common;
 class Math
 {
     /**
-     * Calculate the distance between to points
+     * Calculate the area of a triangle
      *
-     * @param Point $head First point
-     * @param Point $tail Last Point
+     * @param Point $a First point
+     * @param Point $b Middle point
+     * @param Point $c Last point
      *
      * @return float
      */
-    static public function distanceBetweenPoints(Point $head, Point $tail)
+    static public function areaOfTriangle( Point $a, Point $b, Point $c)
+    {
+        $area  = $a->x * ( $b->y - $c->y );
+        $area += $b->x * ( $c->y - $a->y );
+        $area += $c->x * ( $a->y - $b->y );
+        return abs($area / 2);
+    }
+    /**
+     * Calculate the distance between to points
+     *
+     * @param Point $head First point
+     * @param Point $tail Last point
+     *
+     * @return float
+     */
+    static public function distanceBetweenPoints( Point $head, Point $tail )
     {
         return pow($head->x - $tail->x, 2) + pow($head->y - $tail->y, 2);
     }

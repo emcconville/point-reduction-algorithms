@@ -1,7 +1,29 @@
 <?php
+/**
+ * This file is part of Point Reduction Algorithms library.
+ * 
+ * PHP Version 5.4
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage ReumannWitkamTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 
 use PointReduction\Common\Point;
 
+/**
+ * PHPUnit test for Reumann-Witkam algorithm
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage ReumannWitkamTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
 class ReumannWitkamTest extends PHPUnit_Framework_TestCase
 {
     /**
