@@ -28,9 +28,13 @@ use PointReduction\Common\Point,
 class PointTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Smoke test point object
+     *
      * @test
      * @smoke
      * @covers \PointReduction\Common\Point::__construct
+     *
+     * @return NULL
      */
     public function testConstruct()
     {

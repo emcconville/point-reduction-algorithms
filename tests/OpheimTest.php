@@ -12,7 +12,8 @@
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Point;
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\Opheim;
 
 /**
  * PHPUnit test for Opheim algorithm
@@ -27,12 +28,16 @@ use PointReduction\Common\Point;
 class OpheimTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Test Opheim algorithm
+     *
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
      * @covers PointReduction\Algorithms\Opheim::apply
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
      * @covers PointReduction\Common\Math::lastKey
+     *
+     * @return NULL
      */
     public function testApply()
     {
@@ -46,20 +51,25 @@ class OpheimTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\Opheim::apply($givenPoints, [75, 75]);
+        $reducedPoints = Opheim::apply($givenPoints, [75, 75]);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);
         $this->assertEquals($givenPoints[6], $reducedPoints[3]);
         $this->assertEquals($givenPoints[7], $reducedPoints[4]);
     }
+
     /**
+     * Test method with bad param
+     *
      * @test
-     * @covers PointReduction\Algorithms\Opheim::apply
+     * @covers            PointReduction\Algorithms\Opheim::apply
      * @expectedException PointReduction\Algorithms\Exception
+     *
+     * @return NULL
      */
     public function testApplyBadParameter()
     {
-        PointReduction\Algorithms\Opheim::apply(array(), 75);
+        Opheim::apply(array(), 75);
     }
 }

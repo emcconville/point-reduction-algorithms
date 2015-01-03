@@ -12,7 +12,8 @@
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Point;
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\Lang;
 
 /**
  * PHPUnit test for Lang algorithm
@@ -50,7 +51,7 @@ class LangTest extends PHPUnit_Framework_TestCase
             new Point(310, 90),
             new Point(435, 40)
         );
-        $reducedPoints = PointReduction\Algorithms\Lang::apply($givenPoints, 25);
+        $reducedPoints = Lang::apply($givenPoints, 25);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);

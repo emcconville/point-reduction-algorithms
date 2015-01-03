@@ -12,7 +12,8 @@
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Point;
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\RamerDouglasPeucker;
 
 /**
  * PHPUnit test for Ramer-Douglas-Peucker algorithm
@@ -27,11 +28,15 @@ use PointReduction\Common\Point;
 class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Test Ramer-Douglas-Peucker algorithm
+     *
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
      * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
      */
     public function testApply()
     {
@@ -45,7 +50,7 @@ class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\RamerDouglasPeucker::apply($givenPoints, 25);
+        $reducedPoints = RamerDouglasPeucker::apply($givenPoints, 25);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[4], $reducedPoints[2]);

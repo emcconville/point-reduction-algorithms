@@ -29,9 +29,13 @@ use PointReduction\Common\Math,
 class MathTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Smoke test area of triangle.
+     *
      * @test
      * @smoke
      * @covers PointReduction\Common\Math::areaOfTriangle
+     *
+     * @return NULL
      */
     public function testAreaOfTriangle()
     {
@@ -41,22 +45,33 @@ class MathTest extends PHPUnit_Framework_TestCase
         $area = Math::areaOfTriangle($a, $b, $c);
         $this->assertEquals(27, $area);
     }
+
     /**
+     * Smoke test the distance between to points.
+     *
      * @test
      * @smoke
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
      */
     public function testDistanceBetweenPoints()
     {
-        $actual = Math::distanceBetweenPoints(new Point(2, 4), new Point(3, 6));
+        $a = new Point(2, 4);
+        $b = new Point(3, 6);
+        $actual = Math::distanceBetweenPoints($a, $b);
         $this->assertEquals(5.0, $actual);
     }
 
     /**
+     * Smoke test the distance between point & line.
+     *
      * @test
      * @smoke
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
      */
     public function testShortestDistanceToSegment()
     {
@@ -68,10 +83,14 @@ class MathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Smoke test the distance of a point on a line.
+     *
      * @test
      * @smoke
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
      */
     public function testShortestDistanceToSegmentPointAtEnd()
     {
@@ -83,10 +102,14 @@ class MathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Smoke test the distance between a point & zero length line.
+     *
      * @test
      * @smoke
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
      */
     public function testShortestDistanceToEmptyLine()
     {

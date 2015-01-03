@@ -6,13 +6,14 @@
  *
  * @category   PointReduction
  * @package    Test
- * @subpackage VisvalingamWhyatt
+ * @subpackage VisvalingamWhyattTest
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Point;
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\VisvalingamWhyatt;
 
 /**
  * PHPUnit test for Visvalingam-Whyatt algorithm
@@ -24,14 +25,18 @@ use PointReduction\Common\Point;
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
-class VisvalingamWhyatt extends PHPUnit_Framework_TestCase
+class VisvalingamWhyattTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Test Visvalingam-Whyatt algorithm
+     *
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
      * @covers PointReduction\Algorithms\VisvalingamWhyatt::apply
      * @covers PointReduction\Common\Math::areaOfTriangle
      * @covers PointReduction\Common\Math::lastKey
+     *
+     * @return NULL
      */
     public function testApply()
     {
@@ -45,7 +50,7 @@ class VisvalingamWhyatt extends PHPUnit_Framework_TestCase
             new Point(310,  90),
             new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\VisvalingamWhyatt::apply($givenPoints, 5);
+        $reducedPoints = VisvalingamWhyatt::apply($givenPoints, 5);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[4], $reducedPoints[2]);

@@ -12,7 +12,8 @@
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Point;
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\ReumannWitkam;
 
 /**
  * PHPUnit test for Reumann-Witkam algorithm
@@ -27,12 +28,16 @@ use PointReduction\Common\Point;
 class ReumannWitkamTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Test Reumann-Witkam algorithm
+     *
      * @test
      * @covers PointReduction\Algorithms\Protocol::apply
      * @covers PointReduction\Algorithms\ReumannWitkam::apply
      * @covers PointReduction\Common\Math::shortestDistanceToSegment
      * @covers PointReduction\Common\Math::distanceBetweenPoints
      * @covers PointReduction\Common\Math::lastKey
+     *
+     * @return NULL
      */
     public function testApply()
     {
@@ -46,7 +51,7 @@ class ReumannWitkamTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = PointReduction\Algorithms\ReumannWitkam::apply($givenPoints, 45);
+        $reducedPoints = ReumannWitkam::apply($givenPoints, 45);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);
