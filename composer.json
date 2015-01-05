@@ -2,7 +2,7 @@
     "name": "emcconville/point-reduction-algorithms",
     "type": "library",
     "description": "A collection of algorithms for reducing the number of points in polyline",
-    "keywords": ["polygon", "polyline"],
+    "keywords": ["polygon", "polyline", "point-reduction"],
     "license": "GNU",
     "authors": [
         {
