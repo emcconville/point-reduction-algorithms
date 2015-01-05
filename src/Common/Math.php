@@ -60,6 +60,7 @@ class Math
         $area += $c->x * ( $a->y - $b->y );
         return abs($area / 2);
     }
+
     /**
      * Calculate the distance between to points
      *
@@ -70,7 +71,7 @@ class Math
      */
     static public function distanceBetweenPoints( Point $head, Point $tail )
     {
-        return pow($head->x - $tail->x, 2) + pow($head->y - $tail->y, 2);
+        return sqrt(self::pythagoras($head, $tail));
     }
 
     /**
@@ -89,6 +90,21 @@ class Math
     }
 
     /**
+     * Calculate Pythagoras distance.
+     *
+     * Pythagorus as described as "a^2 + b^2 = c^2"
+     *
+     * @param Point $a First point
+     * @param Point $b Last point
+     *
+     * @return float
+     */
+    static public function pythagoras( Point $a, Point $b )
+    {
+        return pow($a->x - $b->x, 2) + pow($a->y - $b->y, 2);
+    }
+
+    /**
      * Calculate perpendicular distance between line & point
      *
      * @param Point $p Point of interest
@@ -101,9 +117,9 @@ class Math
         $h = $l->head;
         $t = $l->tail;
         $return = 0.0;
-        $length = self::distanceBetweenPoints($h, $t);
+        $length = self::pythagoras($h, $t);
         if ( $length == 0 ) {
-            return sqrt(self::distanceBetweenPoints($p, $h));
+            return self::distanceBetweenPoints($p, $h);
         }
         $d  = ( $p->x - $h->x ) * ( $t->x - $h->x );
         $d += ( $p->y - $h->y ) * ( $t->y - $h->y );
@@ -121,6 +137,6 @@ class Math
                 )
             );
         }
-        return sqrt($return);
+        return $return;
     }
 }

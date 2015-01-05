@@ -56,7 +56,7 @@ class RamerDouglasPeucker implements Protocol
     static public function apply( $points, $tolerance )
     {
         $distanceMax = $index = 0;
-        $pointsEnd = key(array_slice($points, -1, 1, true));
+        $pointsEnd = Math::lastKey($points);
         $resultingPoints = $points;
         for ( $i = 1; $i < $pointsEnd; $i++ ) {
             $distance = Math::shortestDistanceToSegment(

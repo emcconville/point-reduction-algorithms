@@ -61,10 +61,13 @@ class ReumannWitkam implements Protocol
             $out = $key + 2;
             $pd = Math::shortestDistanceToSegment($points[$out], $line);
             while ( $out < Math::lastKey($points) && $pd < $tolerance ) {
-                $out++;
-                $pd = Math::shortestDistanceToSegment($points[$out], $line);
+                $pd = Math::shortestDistanceToSegment($points[++$out], $line);
             }
-            array_splice($points, $key + 1, $out - 1);
+            for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
+                unset($points[$i]);
+            }
+            // Re-index points
+            $points = array_values($points);
             $key++;
         }
         return $points;

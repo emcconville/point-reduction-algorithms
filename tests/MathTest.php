@@ -57,9 +57,26 @@ class MathTest extends PHPUnit_Framework_TestCase
      */
     public function testDistanceBetweenPoints()
     {
+        $a = new Point(1, 2);
+        $b = new Point(3, 4);
+        $actual = Math::distanceBetweenPoints($a, $b);
+        $this->assertEquals(2.8284, $actual, null, 0.0001);
+    }
+    
+    /**
+     * Smoke test the pythagorus between to points.
+     *
+     * @test
+     * @smoke
+     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     *
+     * @return NULL
+     */
+    public function testPythagoras()
+    {
         $a = new Point(2, 4);
         $b = new Point(3, 6);
-        $actual = Math::distanceBetweenPoints($a, $b);
+        $actual = Math::pythagoras($a, $b);
         $this->assertEquals(5.0, $actual);
     }
 

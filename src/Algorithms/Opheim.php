@@ -57,9 +57,9 @@ class Opheim implements Protocol
     {
         if ( is_array($tolerance) ) {
             // Perpendicular tolerance
-            $p = (double)array_pop($tolerance);
+            $p = (double)array_shift($tolerance);
             // Radial tolerance
-            $r = (double)array_pop($tolerance);
+            $r = (double)array_shift($tolerance);
         } else {
             throw new Exception("Opheim requires a pair of tolerances.");
         }
@@ -67,14 +67,18 @@ class Opheim implements Protocol
         while ( $key < Math::lastKey($points, -3) ) {
             $line = new Line($points[$key], $points[$key + 1]);
             $out = $key + 2;
-            $pd = Math::shortestDistanceToSegment($points[$out], $line);
-            $d = Math::distanceBetweenPoints($points[$key], $points[$out]);
-            while ( $out < count($points) && $pd < $p && sqrt($d) < $r ) {
+            while (
+                $out < Math::lastKey($points)
+                &&  Math::shortestDistanceToSegment($points[$out], $line) < $p
+                && Math::distanceBetweenPoints($points[$key], $points[$out]) < $r 
+            ) {
                 $out++;
-                $pd = Math::shortestDistanceToSegment($points[$out], $line);
-                $d = Math::distanceBetweenPoints($points[$key], $points[$out]);
             }
-            array_splice($points, $key+1, $out-1);
+            for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
+                unset($points[$i]);
+            }
+            // Re-index points
+            $points = array_values($points);
             $key++;
         }
         return $points;

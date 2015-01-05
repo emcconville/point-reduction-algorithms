@@ -51,10 +51,10 @@ class OpheimTest extends PHPUnit_Framework_TestCase
         new Point(310,  90),
         new Point(435,  40)
         );
-        $reducedPoints = Opheim::apply($givenPoints, [75, 75]);
+        $reducedPoints = Opheim::apply($givenPoints, array(150, 140));
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
-        $this->assertEquals($givenPoints[5], $reducedPoints[2]);
+        $this->assertEquals($givenPoints[3], $reducedPoints[2]);
         $this->assertEquals($givenPoints[6], $reducedPoints[3]);
         $this->assertEquals($givenPoints[7], $reducedPoints[4]);
     }
