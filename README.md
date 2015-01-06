@@ -1,6 +1,6 @@
 #Point Reduction Algorithms
 
-A collection of algorithms for reducing the number of points in polyline
+A collection of algorithms for reducing the number of points in polygon / polyline.
 
 [![Build Status](https://travis-ci.org/emcconville/point-reduction-algorithms.svg?branch=master)](https://travis-ci.org/emcconville/point-reduction-algorithms)
 [![Coverage Status](https://img.shields.io/coveralls/emcconville/point-reduction-algorithms.svg)](https://coveralls.io/r/emcconville/point-reduction-algorithms?branch=master)
@@ -31,9 +31,9 @@ to simplify & reduce shapes.
 Below is an original, uncompressed, polyline with 2151 points, and is delivered
 as SVG weighing in @ 175K.
 
-![Ramer–Douglas–Peucker example](http://emcconville.com/point-reduction-algorithms/examples/dayton_original.svg)
+![Original example](http://emcconville.com/point-reduction-algorithms/examples/dayton_original.svg)
 
-### Ramer–Douglas–Peucker 
+### Ramer–Douglas–Peucker
 
 ```php
 use PointReduction\Common\Point,
