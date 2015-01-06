@@ -23,6 +23,16 @@ With [composer](https://github.com/composer/composer).
 
 ## Algorithms & Usage
 
+Custom shapes, polygon & polyline in web-map applications, can have **too many**
+points. Often a shape will be rendered at a distant zoom-level, and wouldn't
+require such high-resolution. This library's goal is to provided basic methods
+to simplify & reduce shapes.
+
+Below is an original, uncompressed, polyline with 2151 points, and is delivered
+as SVG weighing in @ 175K.
+
+![Ramer–Douglas–Peucker example](http://emcconville.com/point-reduction-algorithms/examples/dayton_original.svg)
+
 ### Ramer–Douglas–Peucker 
 
 ```php
