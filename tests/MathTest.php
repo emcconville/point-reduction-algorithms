@@ -68,7 +68,7 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Common\Math::pythagoras
      *
      * @return NULL
      */
