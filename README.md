@@ -39,7 +39,7 @@ $reducedPoints = RamerDouglasPeucker::apply($givenPoints, $epsilon);
 
 The original polygon of 2151 points has been reduced to 343.
 
-![Ramer–Douglas–Peucker example](examples/dayton_RamerDouglasPeucker.svg)
+![Ramer–Douglas–Peucker example](http://emcconville.com/point-reduction-algorithms/examples/dayton_RamerDouglasPeucker.svg)
 
 ### Visvalingam–Whyatt
 
@@ -57,7 +57,7 @@ $reducedPoints = VisvalingamWhyatt::apply($givenPoints, 343);
 
 The original polygon of 2151 points has been reduced to 343.
 
-![Visvalingam–Whyatt example](examples/dayton_VisvalingamWhyatt.svg)
+![Visvalingam–Whyatt example](http://emcconville.com/point-reduction-algorithms/examples/dayton_VisvalingamWhyatt.svg)
 
 ### Reumann–Witkam
 
@@ -75,7 +75,7 @@ $reducedPoints = ReumannWitkam::apply($givenPoints, $threshold);
 
 The original polygon of 2151 points has been reduced to 872.
 
-![Reumann–Witkam example](examples/dayton_ReumannWitkam.svg)
+![Reumann–Witkam example](http://emcconville.com/point-reduction-algorithms/examples/dayton_ReumannWitkam.svg)
 
 ### Opheim
 
@@ -93,7 +93,7 @@ $reducedPoints = Opheim::apply($givenPoints, $threshold);
 
 The original polygon of 2151 points has been reduced to 684.
 
-![Opheim example](examples/dayton_Opheim.svg)
+![Opheim example](http://emcconville.com/point-reduction-algorithms/examples/dayton_Opheim.svg)
 
 ### Lang 
 
@@ -111,4 +111,4 @@ $reducedPoints = Lang::apply($givenPoints, $threshold);
 
 The original polygon of 2151 points has been reduced to 293.
 
-![Lang example](examples/dayton_Lang.svg)
+![Lang example](http://emcconville.com/point-reduction-algorithms/examples/dayton_Lang.svg)
