@@ -12,9 +12,22 @@
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-use PointReduction\Common\Math,
-    PointReduction\Common\Line,
+use PointReduction\Algorithms\Abstraction,
     PointReduction\Common\Point;
+
+/**
+ * Mock abstraction class
+ *
+ * @category   PointReduction
+ * @package    Test
+ * @subpackage MathTest
+ * @author     E. McConville <emcconville@emcconville.com>
+ * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL, version 3
+ * @link       https://github.com/emcconville/point-reduction-algorithms
+ */
+class MockMath extends Abstraction
+{
+}
 
 /**
  * PHPUnit test for Math object
@@ -29,11 +42,39 @@ use PointReduction\Common\Math,
 class MathTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Smoke test error handling
+     *
+     * @covers PointReduction\Algorithms\Abstraction::setPoints
+     * @expectedException PointReduction\Algorithms\InvalidArgumentException
+     *
+     * @return null
+     */
+    public function testBadArgument()
+    {
+        $obj = new MockMath;
+        $obj->setPoints(false);
+    }
+
+    /**
+     * Smoke test error handling
+     *
+     * @covers PointReduction\Algorithms\Abstraction::setPoints
+     * @expectedException PointReduction\Algorithms\InvalidArgumentException
+     *
+     * @return null
+     */
+    public function testBadPointArgument()
+    {
+        $obj = new MockMath;
+        $obj->setPoints(array(new Point(0,1), false));
+    }
+
+    /**
      * Smoke test area of triangle.
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::areaOfTriangle
+     * @covers PointReduction\Algorithms\Abstraction::areaOfTriangle
      *
      * @return NULL
      */
@@ -42,8 +83,12 @@ class MathTest extends PHPUnit_Framework_TestCase
         $a = new Point(0, 0);
         $b = new Point(0, 9);
         $c = new Point(6, 0);
-        $area = Math::areaOfTriangle($a, $b, $c);
-        $this->assertEquals(27, $area);
+
+        $method = new ReflectionMethod('MockMath', 'areaOfTriangle');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b, $c));
+
+        $this->assertEquals(27, $actual);
     }
 
     /**
@@ -51,7 +96,7 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      *
      * @return NULL
      */
@@ -59,7 +104,11 @@ class MathTest extends PHPUnit_Framework_TestCase
     {
         $a = new Point(1, 2);
         $b = new Point(3, 4);
-        $actual = Math::distanceBetweenPoints($a, $b);
+
+        $method = new ReflectionMethod('MockMath', 'distanceBetweenPoints');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b));
+
         $this->assertEquals(2.8284, $actual, null, 0.0001);
     }
     
@@ -68,15 +117,19 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::pythagoras
+     * @covers PointReduction\Algorithms\Abstraction::pythagorus
      *
      * @return NULL
      */
-    public function testPythagoras()
+    public function testPythagorus()
     {
         $a = new Point(2, 4);
         $b = new Point(3, 6);
-        $actual = Math::pythagoras($a, $b);
+
+        $method = new ReflectionMethod('MockMath', 'pythagorus');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b));
+
         $this->assertEquals(5.0, $actual);
     }
 
@@ -85,17 +138,20 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::shortestDistanceToSegment
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      *
      * @return NULL
      */
     public function testShortestDistanceToSegment()
     {
-        $actual = Math::shortestDistanceToSegment(
-            new Point(4, 3),
-            new Line(new Point(2, 4), new Point(4, 4))
-        );
+        $a = new Point(4, 3);
+        $b = new Point(2, 4);
+        $c = new Point(4, 4);
+        $method = new ReflectionMethod('MockMath', 'shortestDistanceToSegment');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b, $c));
+
         $this->assertEquals(1.0, $actual);
     }
 
@@ -104,18 +160,43 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::shortestDistanceToSegment
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      *
      * @return NULL
      */
     public function testShortestDistanceToSegmentPointAtEnd()
     {
-        $actual = Math::shortestDistanceToSegment(
-            new Point(4, 4),
-            new Line(new Point(3, 3), new Point(4, 4))
-        );
+        $a = new Point(4, 4);
+        $b = new Point(3, 3);
+        $c = new Point(4, 4);
+        $method = new ReflectionMethod('MockMath', 'shortestDistanceToSegment');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b, $c));
+
         $this->assertEquals(0.0, $actual);
+    }
+
+    /**
+     * Smoke test the distance of a point on a line.
+     *
+     * @test
+     * @smoke
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
+     *
+     * @return NULL
+     */
+    public function testShortestDistanceToSegmentPointAtBegin()
+    {
+        $a = new Point(5, 4);
+        $b = new Point(4, 4);
+        $c = new Point(3, 3);
+        $method = new ReflectionMethod('MockMath', 'shortestDistanceToSegment');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b, $c));
+
+        $this->assertEquals(1.0, $actual);
     }
 
     /**
@@ -123,17 +204,19 @@ class MathTest extends PHPUnit_Framework_TestCase
      *
      * @test
      * @smoke
-     * @covers PointReduction\Common\Math::shortestDistanceToSegment
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      *
      * @return NULL
      */
     public function testShortestDistanceToEmptyLine()
     {
-        $actual = Math::shortestDistanceToSegment(
-            new Point(3, 4),
-            new Line(new Point(4, 4), new Point(4, 4))
-        );
+        $a = new Point(3, 4);
+        $b = new Point(4, 4);
+        $c = new Point(4, 4);
+        $method = new ReflectionMethod('MockMath', 'shortestDistanceToSegment');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs(new MockMath, array($a, $b, $c));
         $this->assertEquals(1.0, $actual);
     }
 }

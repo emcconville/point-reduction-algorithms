@@ -34,7 +34,7 @@ class PointTest extends PHPUnit_Framework_TestCase
      * @smoke
      * @covers \PointReduction\Common\Point::__construct
      *
-     * @return NULL
+     * @return null
      */
     public function testConstruct()
     {
@@ -42,4 +42,22 @@ class PointTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($point->x, 3.4);
         $this->assertEquals($point->y, 6.8);
     }
+
+    /**
+     * Smoke test point object interface
+     *
+     * @test
+     * @smoke
+     * @covers \PointReduction\Common\Point::__construct
+     * @covers \PointReduction\Common\Point::getCoordinates
+     * @covers \PointReduction\Common\PointInterface::getCoordinates
+     *
+     * @return null
+     */
+     public function testGetCoordinates()
+     {
+         $point = new Point(3.4, 6.8);
+         $actual = $point->getCoordinates();
+         $this->assertEquals(array(3.4, 6.8), $actual);
+     }
 }

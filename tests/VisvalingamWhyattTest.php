@@ -31,14 +31,14 @@ class VisvalingamWhyattTest extends PHPUnit_Framework_TestCase
      * Test Visvalingam-Whyatt algorithm
      *
      * @test
-     * @covers PointReduction\Algorithms\Protocol::apply
-     * @covers PointReduction\Algorithms\VisvalingamWhyatt::apply
-     * @covers PointReduction\Common\Math::areaOfTriangle
-     * @covers PointReduction\Common\Math::lastKey
+     * @covers PointReduction\Algorithms\Abstraction::setPoints
+     * @covers PointReduction\Algorithms\VisvalingamWhyatt::reduce
+     * @covers PointReduction\Algorithms\Abstraction::areaOfTriangle
+     * @covers PointReduction\Algorithms\Abstraction::lastKey
      *
      * @return NULL
      */
-    public function testApply()
+    public function testReduce()
     {
         $givenPoints = array(
             new Point(40,  40),
@@ -50,7 +50,8 @@ class VisvalingamWhyattTest extends PHPUnit_Framework_TestCase
             new Point(310,  90),
             new Point(435,  40)
         );
-        $reducedPoints = VisvalingamWhyatt::apply($givenPoints, 5);
+        $reducer = new VisvalingamWhyatt($givenPoints);
+        $reducedPoints = $reducer->reduce(5);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[4], $reducedPoints[2]);

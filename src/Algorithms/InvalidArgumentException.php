@@ -15,45 +15,30 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with PointReduction.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Line class file
+ * Exception class file
  *
  * PHP Version 5.4
  *
  * @category   PointReduction
- * @package    Common
- * @subpackage Line
+ * @package    Algorithms
+ * @subpackage InvalidArgumentException
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
 
-namespace PointReduction\Common;
+namespace PointReduction\Algorithms;
 
-/**
- * Simple Line structure
- *
- * @category   PointReduction
- * @package    Common
- * @subpackage Line
- * @author     E. McConville <emcconville@emcconville.com>
- * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
- * @link       https://github.com/emcconville/point-reduction-algorithms
- */
-class Line
+ /**
+  * Extending global exception into package namespace
+  *
+  * @category   PointReduction
+  * @package    Algorithms
+  * @subpackage InvalidArgumentException
+  * @author     E. McConville <emcconville@emcconville.com>
+  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
+  * @link       https://github.com/emcconville/point-reduction-algorithms
+  */
+class InvalidArgumentException extends \InvalidArgumentException
 {
-    public $head, $tail;
-
-    /**
-     * Allocate & init Line object
-     *
-     * @param PointReduction\Common\Point $head Starting point of line
-     * @param PointReduction\Common\Point $tail Ending point of line
-     *
-     * @return PointReduction\Common\Line
-     */
-    public function __construct(Point $head, Point $tail)
-    {
-        $this->head = $head;
-        $this->tail = $tail;
-    }
 }

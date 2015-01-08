@@ -39,7 +39,7 @@ namespace PointReduction\Common;
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
-class Point
+class Point implements PointInterface
 {
     public $x, $y;
 
@@ -55,5 +55,15 @@ class Point
     {
         $this->x = $x;
         $this->y = $y;
+    }
+
+    /**
+     * Return a basic non-associated array of point coordinates.
+     *
+     * @return array
+     */
+    public function getCoordinates()
+    {
+        return array($this->x, $this->y);
     }
 }

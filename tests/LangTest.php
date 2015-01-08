@@ -31,15 +31,15 @@ class LangTest extends PHPUnit_Framework_TestCase
      * Test Lang algorithm
      *
      * @test
-     * @covers PointReduction\Algorithms\Protocol::apply
-     * @covers PointReduction\Algorithms\Lang::apply
-     * @covers PointReduction\Common\Math::shortestDistanceToSegment
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
-     * @covers PointReduction\Common\Math::lastKey
+     * @covers PointReduction\Algorithms\Abstraction::setPoints
+     * @covers PointReduction\Algorithms\Lang::reduce
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\Abstraction::lastKey
      *
      * @return NULL
      */
-    public function testApply()
+    public function testReduce()
     {
         $givenPoints = array(
             new Point(40, 40),
@@ -51,7 +51,8 @@ class LangTest extends PHPUnit_Framework_TestCase
             new Point(310, 90),
             new Point(435, 40)
         );
-        $reducedPoints = Lang::apply($givenPoints, 25);
+        $reducer = new Lang($givenPoints);
+        $reducedPoints = $reducer->reduce(25);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);

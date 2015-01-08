@@ -29,8 +29,6 @@
  */
 
 namespace PointReduction\Algorithms;
-use PointReduction\Common\Math,
-    PointReduction\Common\Line;
 
 /**
  * Visvalingam-Whyatt simplification algorithm class
@@ -43,39 +41,38 @@ use PointReduction\Common\Math,
  * @link       https://github.com/emcconville/point-reduction-algorithms
  * @see        PointReduction\Algorithms\Protocol
  */
-class VisvalingamWhyatt implements Protocol
+class VisvalingamWhyatt extends Abstraction
 {
     /**
      * Reduce points with Visvalingam-Whyatt algorithm.
      *
-     * @param array   $points Finite set of points
      * @param integer $target Desired count of points
      *
      * @return array Reduced set of points
      */
-    static public function apply( $points, $target )
+    public function reduce( $target )
     {
-        $kill = count($points) - $target;
+        $kill = count($this->points) - $target;
         while ( $kill-- > 0 ) {
             $idx = 1;
-            $minArea = Math::areaOfTriangle(
-                $points[0],
-                $points[1],
-                $points[2]
+            $minArea = $this->areaOfTriangle(
+                $this->points[0],
+                $this->points[1],
+                $this->points[2]
             );
-            foreach (range(2, Math::lastKey($points, -2)) as $segment) {
-                $area = Math::areaOfTriangle(
-                    $points[$segment - 1],
-                    $points[$segment],
-                    $points[$segment + 1]
+            foreach (range(2, $this->lastKey($this->points, -2)) as $segment) {
+                $area = $this->areaOfTriangle(
+                    $this->points[$segment - 1],
+                    $this->points[$segment],
+                    $this->points[$segment + 1]
                 );
                 if ( $area < $minArea ) {
                     $minArea = $area;
                     $idx = $segment;
                 }
             }
-            array_splice($points, $idx, 1);
+            array_splice($this->points, $idx, 1);
         }
-        return $points;
+        return $this->points;
     }
 }

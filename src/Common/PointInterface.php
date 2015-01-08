@@ -15,42 +15,51 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with PointReduction.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Simplification algorithm protocol file
+ * Point interface file
  *
  * PHP Version 5.4
  *
  * @category   PointReduction
- * @package    Algorithms
- * @subpackage Protocol
+ * @package    Common
+ * @subpackage Point
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
- * @link       http://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm
  */
 
-namespace PointReduction\Algorithms;
+namespace PointReduction\Common;
 
 /**
- * Protocol interface for all algorithms to follow.
+ * Common Point interface
  *
  * @category   PointReduction
- * @package    Algorithms
- * @subpackage Protocol
+ * @package    Common
+ * @subpackage PointInterface
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
- *
- * @codeCoverageIgnore
  */
-interface Protocol
+interface PointInterface
 {
     /**
-     * Reduce given points by used of sub-class algorithm
+     * Return a basic non-associated array of point coordinates.
      *
-     * @param array $points    Finite set of points
-     * @param mixed $tolerance Defined threshold to reduce by
+     * As the definition of a point can vary between applications, this
+     * interface allows a common gateway method to retrieving point data in a
+     * normalized pattern.
+     * Example:
+     * <code>
+     * <?php
+     * class LatLon extends PointReduction\Common\PointInterface {
+     *   // ...
+     *   public function getCoordinates() {
+     *     return array($this->latitude, $this->longitude);
+     *   }
+     * }
+     * ?>
+     * </code>
      *
      * @return array
      */
-    static public function apply( $points, $tolerance );
+    public function getCoordinates();
 }

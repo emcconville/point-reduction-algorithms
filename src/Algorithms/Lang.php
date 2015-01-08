@@ -43,36 +43,42 @@ use PointReduction\Common\Math,
  * @link       https://github.com/emcconville/point-reduction-algorithms
  * @see        PointReduction\Algorithms\Protocol
  */
-class Lang implements Protocol
+class Lang extends Abstraction
 {
     /**
      * Reduce points with Lang algorithm.
      *
-     * @param array $points    Finite set of points
      * @param mixed $tolerance Defined threshold to reduce by
      *
      * @return array Reduced set of points
      */
-    static public function apply( $points, $tolerance )
+    public function reduce( $tolerance )
     {
         $key = 0;
-        $endPoint = Math::lastKey($points);
+        $endPoint = $this->lastKey($this->points);
 
         do {
             if ( $key + 1 == $endPoint ) {
-                if ( $endPoint != Math::lastKey($points) ) {
+                if ( $endPoint != $this->lastKey($this->points) ) {
                     $key = $endPoint;
-                    $endPoint = Math::lastKey($points);
+                    $endPoint = $this->lastKey($this->points);
                 } else {
                     /* Ignore */
                 }
             } else {
-                $line = new Line($points[$key], $points[$endPoint]);
                 $maxIndex = $key + 1;
-                $d = Math::shortestDistanceToSegment($points[$maxIndex], $line);
+                $d = $this->shortestDistanceToSegment(
+                    $this->points[$maxIndex],
+                    $this->points[$key],
+                    $this->points[$endPoint]
+                );
                 $maxD = $d;
                 for ( $i = $maxIndex + 1; $i < $endPoint; $i++ ) {
-                    $d = Math::shortestDistanceToSegment($points[$i], $line);
+                    $d = $this->shortestDistanceToSegment(
+                        $this->points[$i],
+                        $this->points[$key],
+                        $this->points[$endPoint]
+                    );
                     if ( $d > $maxD ) {
                         $maxD = $d;
                         $maxIndex = $i;
@@ -82,14 +88,14 @@ class Lang implements Protocol
                     $endPoint--;
                 } else {
                     for ( $i = $key + 1; $i < $endPoint; $i++ ) {
-                        unset($points[$i]);
+                        unset($this->points[$i]);
                     }
                     $key = $endPoint;
-                    $endPoint = Math::lastKey($points);
+                    $endPoint = $this->lastKey($this->points);
                 }
             }
-        } while ( $key < Math::lastKey($points, -2)
-                  || $endPoint != Math::lastKey($points) );
-        return array_values($points);
+        } while ( $key < $this->lastKey($this->points, -2)
+                  || $endPoint != $this->lastKey($this->points) );
+        return array_values($this->points);
     }
 }

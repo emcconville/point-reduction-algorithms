@@ -43,33 +43,39 @@ use PointReduction\Common\Math,
  * @link       https://github.com/emcconville/point-reduction-algorithms
  * @see        PointReduction\Algorithms\Protocol
  */
-class ReumannWitkam implements Protocol
+class ReumannWitkam extends Abstraction
 {
     /**
      * Reduce points with Opheim algorithm.
      *
-     * @param array $points    Finite set of points
      * @param mixed $tolerance Defined threshold to reduce by
      *
      * @return array Reduced set of points
      */
-    static public function apply( $points, $tolerance )
+    public function reduce( $tolerance )
     {
         $key = 0;
-        while ( $key < Math::lastKey($points, -3) ) {
-            $line = new Line($points[$key], $points[$key + 1]);
+        while ( $key < $this->lastKey($this->points, -3) ) {
             $out = $key + 2;
-            $pd = Math::shortestDistanceToSegment($points[$out], $line);
-            while ( $out < Math::lastKey($points) && $pd < $tolerance ) {
-                $pd = Math::shortestDistanceToSegment($points[++$out], $line);
+            $pd = $this->shortestDistanceToSegment(
+                $this->points[$out],
+                $this->points[$key],
+                $this->points[$key + 1]
+            );
+            while ( $out < $this->lastKey($this->points) && $pd < $tolerance ) {
+                $pd = $this->shortestDistanceToSegment(
+                    $this->points[++$out],
+                    $this->points[$key],
+                    $this->points[$key + 1]
+                );
             }
             for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
-                unset($points[$i]);
+                unset($this->points[$i]);
             }
             // Re-index points
-            $points = array_values($points);
+            $this->points = array_values($this->points);
             $key++;
         }
-        return $points;
+        return $this->points;
     }
 }

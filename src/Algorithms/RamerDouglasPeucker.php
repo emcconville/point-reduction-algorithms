@@ -43,8 +43,21 @@ use PointReduction\Common\Math,
  * @link       https://github.com/emcconville/point-reduction-algorithms
  * @see        PointReduction\Algorithms\Protocol
  */
-class RamerDouglasPeucker implements Protocol
+class RamerDouglasPeucker extends Abstraction
 {
+    /**
+     * Public visible method to reduce points.
+     *
+     * @param mixed $tolerance Defined threshold to reduce by
+     *
+     * @return array            Reduced set of points
+     */
+    public function reduce( $tolerance )
+    {
+        $this->points = $this->_reduce($this->points, (double)$tolerance);
+        return $this->points;
+    }
+
     /**
      * Reduce points with Ramer-Douglas-Peucker algorithm.
      *
@@ -53,15 +66,15 @@ class RamerDouglasPeucker implements Protocol
      *
      * @return array            Reduced set of points
      */
-    static public function apply( $points, $tolerance )
+    private function _reduce( $points, $tolerance )
     {
         $distanceMax = $index = 0;
-        $pointsEnd = Math::lastKey($points);
-        $resultingPoints = $points;
+        $pointsEnd = $this->lastKey($points);
         for ( $i = 1; $i < $pointsEnd; $i++ ) {
-            $distance = Math::shortestDistanceToSegment(
+            $distance = $this->shortestDistanceToSegment(
                 $points[$i],
-                new Line($points[0], $points[$pointsEnd])
+                $points[0],
+                $points[$pointsEnd]
             );
             if ( $distance > $distanceMax ) {
                 $index = $i;
@@ -70,15 +83,19 @@ class RamerDouglasPeucker implements Protocol
         }
 
         if ( $distanceMax > $tolerance ) {
-            $firstHalf = self::apply(
+            $firstHalf = $this->_reduce(
                 array_slice($points, 0, $index+1),
                 $tolerance
             );
-            $secondHalf = self::apply(array_slice($points, $index), $tolerance);
-            $resultingPoints = array_merge($firstHalf, array_slice($secondHalf, 1));
+            $secondHalf = $this->_reduce(
+                array_slice($points, $index),
+                $tolerance
+            );
+            array_shift($secondHalf);
+            $points = array_merge($firstHalf, $secondHalf);
         } else {
-            $resultingPoints = array($points[0], $points[$pointsEnd]);
+            $points = array($points[0], $points[$pointsEnd]);
         }
-        return $resultingPoints;
+        return $points;
     }
 }

@@ -43,44 +43,70 @@ use PointReduction\Common\Math,
  * @link       https://github.com/emcconville/point-reduction-algorithms
  * @see        PointReduction\Algorithms\Protocol
  */
-class Opheim implements Protocol
+class Opheim Extends Abstraction
 {
     /**
      * Reduce points with Opheim algorithm.
      *
-     * @param array $points    Finite set of points
-     * @param mixed $tolerance Defined threshold to reduce by
+     * @param double $p Defined Perpendicular tolerance
+     * @param double $r Defined Radial tolerance
      *
-     * @return array            Reduced set of points
+     * @return array Reduced set of points
      */
-    static public function apply( $points, $tolerance )
+    public function reduce( $p, $r )
     {
-        if ( is_array($tolerance) ) {
-            // Perpendicular tolerance
-            $p = (double)array_shift($tolerance);
-            // Radial tolerance
-            $r = (double)array_shift($tolerance);
-        } else {
-            throw new Exception("Opheim requires a pair of tolerances.");
-        }
+        $p = (double)$p;
+        $r = (double)$r;
         $key = 0;
-        while ( $key < Math::lastKey($points, -3) ) {
-            $line = new Line($points[$key], $points[$key + 1]);
+        while ( $key < $this->lastKey($this->points, -3) ) {
             $out = $key + 2;
             while (
-                $out < Math::lastKey($points)
-                &&  Math::shortestDistanceToSegment($points[$out], $line) < $p
-                && Math::distanceBetweenPoints($points[$key], $points[$out]) < $r 
+                $out < $this->lastKey($this->points)
+                && $this->_shortest($out, $key) < $p
+                && $this->_distance($out, $key) < $r
             ) {
                 $out++;
             }
             for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
-                unset($points[$i]);
+                unset($this->points[$i]);
             }
             // Re-index points
-            $points = array_values($points);
+            $this->points = array_values($this->points);
             $key++;
         }
-        return $points;
+        return $this->points;
+    }
+
+    /**
+     * Short-cut function for shortestDistanceToSegment method
+     *
+     * @param integer $out Test point-index
+     * @param integer $key Index point-index (what???)
+     *
+     * @return double
+     */
+    private function _shortest( $out, $key )
+    {
+        return $this->shortestDistanceToSegment(
+            $this->points[$out],
+            $this->points[$key],
+            $this->points[$key + 1]
+        );
+    }
+
+    /**
+     * Short-cut function for distanceBetweenPoints method
+     *
+     * @param integer $out Test point-index
+     * @param integer $key Index point-index (what???)
+     *
+     * @return double
+     */
+    private function _distance( $out, $key )
+    {
+        return $this->distanceBetweenPoints(
+            $this->points[$out],
+            $this->points[$key]
+        );
     }
 }

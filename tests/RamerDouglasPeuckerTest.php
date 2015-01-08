@@ -31,26 +31,29 @@ class RamerDouglasPeuckerTest extends PHPUnit_Framework_TestCase
      * Test Ramer-Douglas-Peucker algorithm
      *
      * @test
-     * @covers PointReduction\Algorithms\Protocol::apply
-     * @covers PointReduction\Algorithms\RamerDouglasPeucker::apply
-     * @covers PointReduction\Common\Math::shortestDistanceToSegment
-     * @covers PointReduction\Common\Math::distanceBetweenPoints
+     * @covers PointReduction\Algorithms\RamerDouglasPeucker::reduce
+     * @covers PointReduction\Algorithms\RamerDouglasPeucker::_reduce
+     * @covers PointReduction\Algorithms\Abstraction::__construct
+     * @covers PointReduction\Algorithms\Abstraction::setPoints
+     * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
+     * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      *
      * @return NULL
      */
-    public function testApply()
+    public function testReduce()
     {
         $givenPoints = array(
-        new Point(40,  40),
-        new Point(54,  78),
-        new Point(120, 112),
-        new Point(175,  80),
-        new Point(250,  55),
-        new Point(275,  60),
-        new Point(310,  90),
-        new Point(435,  40)
+            new Point(40,  40),
+            new Point(54,  78),
+            new Point(120, 112),
+            new Point(175,  80),
+            new Point(250,  55),
+            new Point(275,  60),
+            new Point(310,  90),
+            new Point(435,  40)
         );
-        $reducedPoints = RamerDouglasPeucker::apply($givenPoints, 25);
+        $reducer = new RamerDouglasPeucker($givenPoints);
+        $reducedPoints = $reducer->reduce(24);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[4], $reducedPoints[2]);
