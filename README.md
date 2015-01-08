@@ -2,6 +2,11 @@
 
 A collection of algorithms for reducing the number of points in polygon / polyline.
 
+Custom shapes, polygon & polyline in web-map applications, can have **too many**
+points. Often a shape will be rendered at a distant zoom-level, and wouldn't
+require such high-resolution. This library's goal is to provided basic methods
+to simplify & reduce shapes.
+
 [![Build Status](https://travis-ci.org/emcconville/point-reduction-algorithms.svg?branch=master)](https://travis-ci.org/emcconville/point-reduction-algorithms)
 [![Coverage Status](https://img.shields.io/coveralls/emcconville/point-reduction-algorithms.svg)](https://coveralls.io/r/emcconville/point-reduction-algorithms?branch=master)
 
@@ -23,15 +28,39 @@ With [composer](https://github.com/composer/composer).
 
 ## Algorithms & Usage
 
-Custom shapes, polygon & polyline in web-map applications, can have **too many**
-points. Often a shape will be rendered at a distant zoom-level, and wouldn't
-require such high-resolution. This library's goal is to provided basic methods
-to simplify & reduce shapes.
-
 Below is an original, uncompressed, polyline with 2151 points, and is delivered
 as SVG weighing in @ 175K.
 
 ![Original example](http://emcconville.com/point-reduction-algorithms/examples/dayton_original.svg)
+
+All algorithms share a common abstraction, but each class implements a unique
+*reduce* method. Most reduction methods require one argument for tolerance /
+threshold; except, Visvalingam–Whyatt requires the desired final point count,
+and Opheim requires two independent thresholds.
+
+**Example Pseudo code:**
+
+```php
+use PointReduction\Algorithms\ALGORITHM_NAME;
+$obj = new ALGORITHM_NAME($myPoints);
+$myReducedPoints = $obj->reduce($tolerance);
+```
+
+The **$myPoints** must be an array, or traversable object that supports removing
+element at index. Each user defined point must implement
+**PointReduction\Common\PointInterface** which enforces a **getCoordinates**
+method. This common interface allows user objects to have any type of property
+(ie. x/y, latitude/longitude, left/top).
+
+```php
+class MyPoint implements PointReduction\Common\PointInterface
+{
+    // ... my stuff here ...
+    public function getCoordinates() {
+        return array($this->myOwnX, $this->myOwnY);
+    }
+}
+```
 
 ### Ramer–Douglas–Peucker
 
@@ -44,7 +73,8 @@ $givenPoints = array(
     // ... and so one
 );
 $epsilon = 0.001
-$reducedPoints = RamerDouglasPeucker::apply($givenPoints, $epsilon);
+$reducer = new RamerDouglasPeucker($givenPoints);
+$reducedPoints = $reducer->reduce($epsilon);
 ```
 
 The original polygon of 2151 points has been reduced to 343.
@@ -62,7 +92,8 @@ $givenPoints = array(
     // ... and so one
 );
 $desiredPointCount = 343;
-$reducedPoints = VisvalingamWhyatt::apply($givenPoints, 343);
+$reducer = new VisvalingamWhyatt($givenPoints);
+$reducedPoints = $reducer->reduce($desiredPointCount);
 ```
 
 The original polygon of 2151 points has been reduced to 343.
@@ -80,7 +111,8 @@ $givenPoints = array(
     // ... and so one
 );
 $threshold = 0.001;
-$reducedPoints = ReumannWitkam::apply($givenPoints, $threshold);
+$reducer = new ReumannWitkam($givenPoints);
+$reducedPoints = $reducer->reduce($threshold);
 ```
 
 The original polygon of 2151 points has been reduced to 872.
@@ -97,8 +129,10 @@ $givenPoints = array(
     new Point(-84.159250, -39.820120),
     // ... and so one
 );
-$threshold = 0.001;
-$reducedPoints = Opheim::apply($givenPoints, $threshold);
+$perpendicularTolerance = 0.005;
+$radialTolerance = 0.01;
+$reducer = new Opheim($givenPoints);
+$reducedPoints = $reducer->reduce($perpendicularTolerance, $radialTolerance);
 ```
 
 The original polygon of 2151 points has been reduced to 684.
@@ -116,7 +150,8 @@ $givenPoints = array(
     // ... and so one
 );
 $threshold = 0.001;
-$reducedPoints = Lang::apply($givenPoints, $threshold);
+$reducer = new Lang($givenPoints);
+$reducedPoints = $reducer->reduce($threshold);
 ```
 
 The original polygon of 2151 points has been reduced to 293.
