@@ -58,10 +58,10 @@ class Opheim Extends Abstraction
         $p = (double)$p;
         $r = (double)$r;
         $key = 0;
-        while ( $key < $this->lastKey($this->points, -3) ) {
+        while ( $key < $this->lastKey(-3) ) {
             $out = $key + 2;
             while (
-                $out < $this->lastKey($this->points)
+                $out < $this->lastKey()
                 && $this->_shortest($out, $key) < $p
                 && $this->_distance($out, $key) < $r
             ) {
@@ -70,8 +70,7 @@ class Opheim Extends Abstraction
             for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
                 unset($this->points[$i]);
             }
-            // Re-index points
-            $this->points = array_values($this->points);
+            $this->reindex();
             $key++;
         }
         return $this->points;

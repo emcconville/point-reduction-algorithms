@@ -42,7 +42,7 @@ use PointReduction\Common\PointInterface,
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
  */
-abstract class Abstraction
+abstract class Abstraction implements \Countable
 {
     /**
      * Property for holding subject points
@@ -58,6 +58,7 @@ abstract class Abstraction
      */
     public function __construct( $points = null )
     {
+        $this->points = array();
         if ( $points ) {
             $this->setPoints($points);
         }
@@ -116,6 +117,16 @@ abstract class Abstraction
     }
 
     /**
+     * Send all `count' methods directly to points property
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->points);
+    }
+
+    /**
      * Calculate the distance between to points
      *
      * @param Point $head First point
@@ -140,9 +151,9 @@ abstract class Abstraction
      *
      * @return integer
      */
-    protected function lastKey( $points, $index = -1 )
+    protected function lastKey( $index = -1 )
     {
-        return key(array_slice($points, $index, 1, true));
+        return key(array_slice($this->points, $index, 1, true));
     }
 
     /**
@@ -160,6 +171,16 @@ abstract class Abstraction
         list( $ax, $ay ) = $a->getCoordinates();
         list( $bx, $by ) = $b->getCoordinates();
         return pow($ax - $bx, 2) + pow($ay - $by, 2);
+    }
+
+    /**
+     * Reindex point keys to match value order.
+     *
+     * @return array
+     */
+    public function reindex()
+    {
+        return $this->points = array_values($this->points);
     }
 
     /**

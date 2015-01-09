@@ -38,6 +38,7 @@ class OpheimTest extends PHPUnit_Framework_TestCase
      * @covers PointReduction\Algorithms\Abstraction::shortestDistanceToSegment
      * @covers PointReduction\Algorithms\Abstraction::distanceBetweenPoints
      * @covers PointReduction\Algorithms\Abstraction::lastKey
+     * @covers PointReduction\Algorithms\Abstraction::reindex
      *
      * @return NULL
      */

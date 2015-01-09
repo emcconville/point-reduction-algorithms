@@ -52,7 +52,7 @@ class VisvalingamWhyatt extends Abstraction
      */
     public function reduce( $target )
     {
-        $kill = count($this->points) - $target;
+        $kill = count($this) - $target;
         while ( $kill-- > 0 ) {
             $idx = 1;
             $minArea = $this->areaOfTriangle(
@@ -60,7 +60,7 @@ class VisvalingamWhyatt extends Abstraction
                 $this->points[1],
                 $this->points[2]
             );
-            foreach (range(2, $this->lastKey($this->points, -2)) as $segment) {
+            foreach (range(2, $this->lastKey(-2)) as $segment) {
                 $area = $this->areaOfTriangle(
                     $this->points[$segment - 1],
                     $this->points[$segment],

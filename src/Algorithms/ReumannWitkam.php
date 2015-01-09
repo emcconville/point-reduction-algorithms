@@ -55,14 +55,14 @@ class ReumannWitkam extends Abstraction
     public function reduce( $tolerance )
     {
         $key = 0;
-        while ( $key < $this->lastKey($this->points, -3) ) {
+        while ( $key < $this->lastKey(-3) ) {
             $out = $key + 2;
             $pd = $this->shortestDistanceToSegment(
                 $this->points[$out],
                 $this->points[$key],
                 $this->points[$key + 1]
             );
-            while ( $out < $this->lastKey($this->points) && $pd < $tolerance ) {
+            while ( $out < $this->lastKey() && $pd < $tolerance ) {
                 $pd = $this->shortestDistanceToSegment(
                     $this->points[++$out],
                     $this->points[$key],
@@ -72,8 +72,7 @@ class ReumannWitkam extends Abstraction
             for ( $i = $key+1, $l = $out - 1; $i < $l; $i++ ) {
                 unset($this->points[$i]);
             }
-            // Re-index points
-            $this->points = array_values($this->points);
+            $this->reindex();
             $key++;
         }
         return $this->points;

@@ -69,7 +69,8 @@ class RamerDouglasPeucker extends Abstraction
     private function _reduce( $points, $tolerance )
     {
         $distanceMax = $index = 0;
-        $pointsEnd = $this->lastKey($points);
+        // Can't user $this->lastkey, as this is a reclusive method.
+        $pointsEnd = key(array_slice($points, -1, 1, true));
         for ( $i = 1; $i < $pointsEnd; $i++ ) {
             $distance = $this->shortestDistanceToSegment(
                 $points[$i],

@@ -35,6 +35,7 @@ class VisvalingamWhyattTest extends PHPUnit_Framework_TestCase
      * @covers PointReduction\Algorithms\VisvalingamWhyatt::reduce
      * @covers PointReduction\Algorithms\Abstraction::areaOfTriangle
      * @covers PointReduction\Algorithms\Abstraction::lastKey
+     * @covers PointReduction\Algorithms\Abstraction::count
      *
      * @return NULL
      */

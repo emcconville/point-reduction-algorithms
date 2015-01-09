@@ -55,13 +55,13 @@ class Lang extends Abstraction
     public function reduce( $tolerance )
     {
         $key = 0;
-        $endPoint = $this->lastKey($this->points);
+        $endPoint = $this->lastKey();
 
         do {
             if ( $key + 1 == $endPoint ) {
-                if ( $endPoint != $this->lastKey($this->points) ) {
+                if ( $endPoint != $this->lastKey() ) {
                     $key = $endPoint;
-                    $endPoint = $this->lastKey($this->points);
+                    $endPoint = $this->lastKey();
                 } else {
                     /* Ignore */
                 }
@@ -91,11 +91,11 @@ class Lang extends Abstraction
                         unset($this->points[$i]);
                     }
                     $key = $endPoint;
-                    $endPoint = $this->lastKey($this->points);
+                    $endPoint = $this->lastKey();
                 }
             }
-        } while ( $key < $this->lastKey($this->points, -2)
-                  || $endPoint != $this->lastKey($this->points) );
-        return array_values($this->points);
+        } while ( $key < $this->lastKey(-2)
+                  || $endPoint != $this->lastKey() );
+        return $this->reindex();
     }
 }
