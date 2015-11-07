@@ -48,9 +48,9 @@ class RamerDouglasPeucker extends Abstraction
      *
      * @param mixed $tolerance Defined threshold to reduce by
      *
-     * @return array            Reduced set of points
+     * @return array           Reduced set of points
      */
-    public function reduce( $tolerance )
+    public function reduce( $tolerance ): array
     {
         $this->points = $this->_reduce($this->points, (double)$tolerance);
         return $this->points;
@@ -62,9 +62,9 @@ class RamerDouglasPeucker extends Abstraction
      * @param array $points    Finite set of points
      * @param mixed $tolerance Defined threshold to reduce by
      *
-     * @return array            Reduced set of points
+     * @return array           Reduced set of points
      */
-    private function _reduce( $points, $tolerance )
+    private function _reduce( $points, $tolerance ): array
     {
         $distanceMax = $index = 0;
         // Can't user $this->lastkey, as this is a reclusive method.

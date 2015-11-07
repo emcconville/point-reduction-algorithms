@@ -50,7 +50,7 @@ class VisvalingamWhyatt extends Abstraction
      *
      * @return array Reduced set of points
      */
-    public function reduce( $target )
+    public function reduce( $target ): array
     {
         $kill = count($this) - $target;
         while ( $kill-- > 0 ) {

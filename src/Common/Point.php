@@ -62,7 +62,7 @@ class Point implements PointInterface
      *
      * @return array
      */
-    public function getCoordinates()
+    public function getCoordinates(): array
     {
         return array($this->x, $this->y);
     }

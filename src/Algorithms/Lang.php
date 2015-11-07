@@ -50,7 +50,7 @@ class Lang extends Abstraction
      *
      * @return array Reduced set of points
      */
-    public function reduce( $tolerance )
+    public function reduce( $tolerance ): array
     {
         $key = 0;
         $endPoint = $this->lastKey();

@@ -106,14 +106,14 @@ abstract class Abstraction implements \Countable
         PointInterface $a,
         PointInterface $b,
         PointInterface $c
-    ) {
+    ): float {
         list( $ax, $ay ) = $a->getCoordinates();
         list( $bx, $by ) = $b->getCoordinates();
         list( $cx, $cy ) = $c->getCoordinates();
         $area  = $ax * ( $by - $cy );
         $area += $bx * ( $cy - $ay );
         $area += $cx * ( $ay - $by );
-        return abs($area / 2);
+        return (float)abs($area / 2);
     }
 
     /**
@@ -121,7 +121,7 @@ abstract class Abstraction implements \Countable
      *
      * @return integer
      */
-    public function count()
+    public function count(): int
     {
         return count($this->points);
     }
@@ -137,7 +137,7 @@ abstract class Abstraction implements \Countable
     protected function distanceBetweenPoints(
         PointInterface $head,
         PointInterface $tail
-    ) {
+    ): float {
         return sqrt(self::pythagorus($head, $tail));
     }
 
@@ -151,7 +151,7 @@ abstract class Abstraction implements \Countable
      *
      * @return integer
      */
-    protected function lastKey( $index = -1 )
+    protected function lastKey( $index = -1 ): int
     {
         return key(array_slice($this->points, $index, 1, true));
     }
@@ -166,8 +166,10 @@ abstract class Abstraction implements \Countable
      *
      * @return float
      */
-    protected function pythagorus( PointInterface $a, PointInterface $b )
-    {
+    protected function pythagorus(
+        PointInterface $a,
+        PointInterface $b
+    ): float {
         list( $ax, $ay ) = $a->getCoordinates();
         list( $bx, $by ) = $b->getCoordinates();
         return pow($ax - $bx, 2) + pow($ay - $by, 2);
@@ -178,7 +180,7 @@ abstract class Abstraction implements \Countable
      *
      * @return array
      */
-    public function reindex()
+    public function reindex(): array
     {
         return $this->points = array_values($this->points);
     }
@@ -196,7 +198,7 @@ abstract class Abstraction implements \Countable
         PointInterface $a,
         PointInterface $b,
         PointInterface $c
-    ) {
+    ): float {
         list( $ax, $ay ) = $a->getCoordinates();
         list( $bx, $by ) = $b->getCoordinates();
         list( $cx, $cy ) = $c->getCoordinates();

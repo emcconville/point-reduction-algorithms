@@ -51,7 +51,7 @@ class Opheim Extends Abstraction
      *
      * @return array Reduced set of points
      */
-    public function reduce( $p, $r )
+    public function reduce( $p, $r ): array
     {
         $p = (double)$p;
         $r = (double)$r;
@@ -80,9 +80,9 @@ class Opheim Extends Abstraction
      * @param integer $out Test point-index
      * @param integer $key Index point-index (what???)
      *
-     * @return double
+     * @return float
      */
-    private function _shortest( $out, $key )
+    private function _shortest( $out, $key ): float
     {
         return $this->shortestDistanceToSegment(
             $this->points[$out],
@@ -97,9 +97,9 @@ class Opheim Extends Abstraction
      * @param integer $out Test point-index
      * @param integer $key Index point-index (what???)
      *
-     * @return double
+     * @return float
      */
-    private function _distance( $out, $key )
+    private function _distance( $out, $key ): float
     {
         return $this->distanceBetweenPoints(
             $this->points[$out],

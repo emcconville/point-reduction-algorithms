@@ -61,5 +61,5 @@ interface PointInterface
      *
      * @return array
      */
-    public function getCoordinates();
+    public function getCoordinates(): array;
 }
