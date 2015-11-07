@@ -146,8 +146,7 @@ abstract class Abstraction implements \Countable
      *
      * This can be used to calculate the size (nth - 1) of an array.
      *
-     * @param array   $points Subject list to find last key/index.
-     * @param integer $index  Offset to match (default -1).
+     * @param integer $index Offset to match (default -1).
      *
      * @return integer
      */
