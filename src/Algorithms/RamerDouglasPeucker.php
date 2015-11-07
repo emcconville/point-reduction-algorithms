@@ -29,8 +29,6 @@
  */
 
 namespace PointReduction\Algorithms;
-use PointReduction\Common\Math,
-    PointReduction\Common\Line;
 
 /**
  * RamerDouglasPeucker simplification algorithm class
