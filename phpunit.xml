@@ -13,12 +13,15 @@
     <testsuite name="Point Reduction Algorithms">
       <directory suffix=".php">./tests/</directory>
     </testsuite>
-    <filter>
-      <blacklist>
-        <directory suffix=".php">./vendor</directory>
-      </blacklist>
-    </filter>
   </testsuites>
+  <filter>
+    <blacklist>
+      <directory suffix=".php">./vendor</directory>
+    </blacklist>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./src</directory>
+    </whitelist>
+  </filter>
   <logging>
     <log type="coverage-clover" target="build/logs/clover.xml"/>
   </logging>
