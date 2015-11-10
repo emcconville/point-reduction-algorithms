@@ -1,15 +1,16 @@
 #Point Reduction Algorithms
 
+[![Latest Stable Version](https://poser.pugx.org/emcconville/point-reduction-algorithms/v/stable.svg)](https://packagist.org/packages/emcconville/point-reduction-algorithms)
+[![Build Status](https://travis-ci.org/emcconville/point-reduction-algorithms.svg?branch=master)](https://travis-ci.org/emcconville/point-reduction-algorithms)
+[![Coverage Status](https://img.shields.io/coveralls/emcconville/point-reduction-algorithms.svg)](https://coveralls.io/r/emcconville/point-reduction-algorithms?branch=master)
+[![License](https://poser.pugx.org/emcconville/point-reduction-algorithms/license.svg)](https://packagist.org/packages/emcconville/point-reduction-algorithms)
+
 A collection of algorithms for reducing the number of points in polygon / polyline.
 
 Custom shapes, polygon & polyline in web-map applications, can have **too many**
 points. Often a shape will be rendered at a distant zoom-level, and wouldn't
 require such high-resolution. This library's goal is to provided basic methods
 to simplify & reduce shapes.
-
-[![Build Status](https://travis-ci.org/emcconville/point-reduction-algorithms.svg?branch=master)](https://travis-ci.org/emcconville/point-reduction-algorithms)
-[![Coverage Status](https://img.shields.io/coveralls/emcconville/point-reduction-algorithms.svg)](https://coveralls.io/r/emcconville/point-reduction-algorithms?branch=master)
-
 
 ## Install
 
