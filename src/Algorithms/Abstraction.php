@@ -76,11 +76,16 @@ abstract class Abstraction implements \Countable
         if ( is_array($points) || $points instanceof Traversable ) {
             array_walk(
                 $points,
-                function ($point, $index) {
+                function (&$point, $index) {
                     if ( !$point instanceof PointInterface ) {
-                        $msg = "Point at index #$index does not implement "
-                             . "PointReduction\\Common\\PointInterface";
-                        throw new InvalidArgumentException($msg);
+                        if (is_array($point) && count($point) == 2) {
+                            list($x, $y) = array_values($point);
+                            $point = new Point($x, $y);
+                        } else {
+                            $msg = "Point at index #$index does not implement "
+                                 . "PointReduction\\Common\\PointInterface";
+                            throw new InvalidArgumentException($msg);
+                        }
                     }
                 }
             );
@@ -146,8 +151,7 @@ abstract class Abstraction implements \Countable
      *
      * This can be used to calculate the size (nth - 1) of an array.
      *
-     * @param array   $points Subject list to find last key/index.
-     * @param integer $index  Offset to match (default -1).
+     * @param integer $index Offset to match (default -1).
      *
      * @return integer
      */
