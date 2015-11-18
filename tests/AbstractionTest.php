@@ -120,4 +120,18 @@ class AbstractionTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($actual, $expected);
         }
     }
+
+    /**
+     * Ensure exception is thrown when a user-coord was invalid.
+     *
+     * @test
+     * @expectedException InvalidArgumentException
+     *
+     * @return NULL
+     */
+    public function testSetPointsWithUserError()
+    {
+        $instance = new MockAlgorithm();
+        $instance->setPoints([[1, 2], null, [5, 6]]);
+    }
 }
