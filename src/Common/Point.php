@@ -66,4 +66,12 @@ class Point implements PointInterface
     {
         return array($this->x, $this->y);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->x . ',' . $this->y;
+    }
 }

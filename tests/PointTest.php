@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of Point Reduction Algorithms library.
- * 
+ *
  * PHP Version 5.4
  *
  * @category   PointReduction
@@ -59,5 +59,32 @@ class PointTest extends PHPUnit_Framework_TestCase
          $point = new Point(3.4, 6.8);
          $actual = $point->getCoordinates();
          $this->assertEquals(array(3.4, 6.8), $actual);
+     }
+
+    /**
+     * Smoke test point object interface
+     *
+     * @test
+     * @smoke
+     * @covers \PointReduction\Common\Point::__construct
+     * @covers \PointReduction\Common\Point::__toString
+     *
+     * @return null
+     */
+     public function testToString()
+     {
+         $point = new Point(3.4, 6.8);
+         $string = $point->__toString();
+         $this->assertEquals('3.4,6.8', $string);
+
+         $string = (string) $point;
+         $this->assertEquals('3.4,6.8', $string);
+
+         $points = [
+            new Point(1, 2),
+            new Point(3, 4),
+         ];
+         $string = implode(' ', $points);
+         $this->assertEquals('1,2 3,4', $string);
      }
 }

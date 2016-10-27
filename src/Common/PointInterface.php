@@ -62,4 +62,11 @@ interface PointInterface
      * @return array
      */
     public function getCoordinates();
+
+    /**
+     * Return a basic string representation.
+     *
+     * @return string
+     */
+    public function __toString();
 }
