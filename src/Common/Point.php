@@ -68,10 +68,12 @@ class Point implements PointInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Return a basic string representation.
+     *
+     * @return string
      */
     public function __toString()
     {
-        return $this->x . ',' . $this->y;
+        return sprintf('%.6g,%.6g', $this->x, $this->y);
     }
 }
