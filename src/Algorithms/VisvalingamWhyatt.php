@@ -39,7 +39,6 @@ namespace PointReduction\Algorithms;
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
- * @see        PointReduction\Algorithms\Protocol
  */
 class VisvalingamWhyatt extends Abstraction
 {

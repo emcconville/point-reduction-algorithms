@@ -53,8 +53,6 @@ abstract class Abstraction implements \Countable
      * Allocate & Initialize sub-class
      *
      * @param array $points Optional subject points.
-     *
-     * @return Abstraction subclass
      */
     public function __construct( $points = null )
     {
@@ -70,10 +68,11 @@ abstract class Abstraction implements \Countable
      * @param mixed $points Must be array or Traversable
      *
      * @return null
+     * @throws InvalidArgumentException
      */
     public function setPoints( $points )
     {
-        if ( is_array($points) || $points instanceof Traversable ) {
+        if ( is_array($points) || $points instanceof \Traversable ) {
             array_walk(
                 $points,
                 function (&$point, $index) {
@@ -101,9 +100,9 @@ abstract class Abstraction implements \Countable
     /**
      * Calculate the area of a triangle
      *
-     * @param Point $a First point
-     * @param Point $b Middle point
-     * @param Point $c Last point
+     * @param PointInterface $a First point
+     * @param PointInterface $b Middle point
+     * @param PointInterface $c Last point
      *
      * @return float
      */
@@ -134,8 +133,8 @@ abstract class Abstraction implements \Countable
     /**
      * Calculate the distance between to points
      *
-     * @param Point $head First point
-     * @param Point $tail Last point
+     * @param PointInterface $head First point
+     * @param PointInterface $tail Last point
      *
      * @return float
      */
