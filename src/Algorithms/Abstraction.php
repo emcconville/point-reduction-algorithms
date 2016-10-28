@@ -67,6 +67,7 @@ abstract class Abstraction implements \Countable
      *
      * @param mixed $points Must be array or Traversable
      *
+     * @return null
      * @throws InvalidArgumentException
      */
     public function setPoints( $points )
@@ -202,6 +203,7 @@ abstract class Abstraction implements \Countable
         list( $ax, $ay ) = $a->getCoordinates();
         list( $bx, $by ) = $b->getCoordinates();
         list( $cx, $cy ) = $c->getCoordinates();
+        $return = 0.0;
         $length = self::pythagorus($b, $c);
         if ( $length == 0 ) {
             return self::distanceBetweenPoints($a, $b);
