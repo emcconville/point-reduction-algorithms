@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/emcconville/point-reduction-algorithms/v/stable.svg)](https://packagist.org/packages/emcconville/point-reduction-algorithms)
 [![Build Status](https://travis-ci.org/emcconville/point-reduction-algorithms.svg?branch=master)](https://travis-ci.org/emcconville/point-reduction-algorithms)
-[![Coverage Status](https://img.shields.io/coveralls/emcconville/point-reduction-algorithms.svg)](https://coveralls.io/r/emcconville/point-reduction-algorithms?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/emcconville/point-reduction-algorithms/badge.svg?branch=master)](https://coveralls.io/github/emcconville/point-reduction-algorithms?branch=master)
 [![License](https://poser.pugx.org/emcconville/point-reduction-algorithms/license.svg)](https://packagist.org/packages/emcconville/point-reduction-algorithms)
 
 A collection of algorithms for reducing the number of points in polygon / polyline.
@@ -42,6 +42,7 @@ and Opheim requires two independent thresholds.
 **Example Pseudo code:**
 
 ```php
+
 use PointReduction\Algorithms\ALGORITHM_NAME;
 $obj = new ALGORITHM_NAME($myPoints);
 $myReducedPoints = $obj->reduce($tolerance);
@@ -54,7 +55,9 @@ method. This common interface allows user objects to have any type of property
 (ie. x/y, latitude/longitude, left/top).
 
 ```php
-class MyPoint implements PointReduction\Common\PointInterface
+use PointReduction\Common\PointInterface;
+
+class MyPoint implements PointInterface
 {
     // ... my stuff here ...
     public function getCoordinates() {
@@ -151,8 +154,9 @@ $givenPoints = array(
     // ... and so one
 );
 $threshold = 0.001;
+$lookAhead = 7;
 $reducer = new Lang($givenPoints);
-$reducedPoints = $reducer->reduce($threshold);
+$reducedPoints = $reducer->reduce($threshold, $lookAhead);
 ```
 
 The original polygon of 2151 points has been reduced to 293.
