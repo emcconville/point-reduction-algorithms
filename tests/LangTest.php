@@ -53,7 +53,7 @@ class LangTest extends PHPUnit_Framework_TestCase
             new Point(435, 40)
         );
         $reducer = new Lang($givenPoints);
-        $reducedPoints = $reducer->reduce(25);
+        $reducedPoints = $reducer->reduce(25, 7);
         $this->assertEquals($givenPoints[0], $reducedPoints[0]);
         $this->assertEquals($givenPoints[2], $reducedPoints[1]);
         $this->assertEquals($givenPoints[5], $reducedPoints[2]);

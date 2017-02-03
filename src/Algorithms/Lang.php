@@ -31,7 +31,7 @@
 namespace PointReduction\Algorithms;
 
 /**
- * Lang simplification algorithm class
+ * Lang simplification algorithm class.
  *
  * @category   PointReduction
  * @package    Algorithms
@@ -43,22 +43,41 @@ namespace PointReduction\Algorithms;
 class Lang extends Abstraction
 {
     /**
+     * Size of segments to evaluate during `reduce` method. Increase number
+     * for greater accuracy, but reduce performance. Odd numbers appear to be
+     * more efficient.
+     *
+     * @version v1.2.0
+     *
+     * @var integer
+     */
+    public $lookAhead = 7;
+
+    /**
      * Reduce points with Lang algorithm.
      *
-     * @param mixed $tolerance Defined threshold to reduce by
+     * @param mixed   $tolerance Defines threshold to reduce by.
+     * @param integer $lookAhead Defines the segment size per iteration.
      *
      * @return array Reduced set of points
+     *
+     * @updated v1.2.0 Introduced `lookAhead` concept to allow user to control
+     *                 performance & accuracy.
      */
-    public function reduce( $tolerance )
+    public function reduce( $tolerance, $lookAhead=null )
     {
+        if ($lookAhead) {
+            $this->lookAhead = (int)$lookAhead;
+        }
+
         $key = 0;
-        $endPoint = $this->lastKey();
+        $endPoint = min($this->lookAhead, $this->lastKey());
 
         do {
             if ( $key + 1 == $endPoint ) {
                 if ( $endPoint != $this->lastKey() ) {
                     $key = $endPoint;
-                    $endPoint = $this->lastKey();
+                    $endPoint = min($endPoint + $this->lookAhead, $this->lastKey());
                 } else {
                     /* Ignore */
                 }
@@ -88,7 +107,7 @@ class Lang extends Abstraction
                         unset($this->points[$i]);
                     }
                     $key = $endPoint;
-                    $endPoint = $this->lastKey();
+                    $endPoint = min($endPoint + $this->lookAhead, $this->lastKey());
                 }
             }
         } while ( $key < $this->lastKey(-2)
