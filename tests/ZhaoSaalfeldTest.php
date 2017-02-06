@@ -33,7 +33,7 @@ class ZhaoSaalfeldTest extends PHPUnit_Framework_TestCase
      * @test
      * @covers PointReduction\Algorithms\Abstraction::setPoints
      * @covers PointReduction\Algorithms\ZhaoSaalfeld::reduce
-     * @covers PointReduction\Algorithms\ZhaoSaalfeld::theta
+     * @covers PointReduction\Algorithms\ZhaoSaalfeld::_theta
      * @covers PointReduction\Algorithms\Abstraction::lastKey
      * @covers PointReduction\Algorithms\Abstraction::count
      *
@@ -66,7 +66,7 @@ class ZhaoSaalfeldTest extends PHPUnit_Framework_TestCase
      * @test
      * @covers PointReduction\Algorithms\Abstraction::setPoints
      * @covers PointReduction\Algorithms\ZhaoSaalfeld::reduce
-     * @covers PointReduction\Algorithms\ZhaoSaalfeld::theta
+     * @covers PointReduction\Algorithms\ZhaoSaalfeld::_theta
      * @covers PointReduction\Algorithms\Abstraction::lastKey
      * @covers PointReduction\Algorithms\Abstraction::count
      *
