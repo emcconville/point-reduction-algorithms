@@ -25,7 +25,6 @@
  * @author     E. McConville <emcconville@emcconville.com>
  * @license    https://www.gnu.org/licenses/lgpl.html GNU LGPL v3
  * @link       https://github.com/emcconville/point-reduction-algorithms
- * @link       http://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm
  */
 
 namespace PointReduction\Algorithms;
