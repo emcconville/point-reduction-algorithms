@@ -47,6 +47,12 @@ use PointReduction\Common\PointInterface;
 class RadialDistance extends Abstraction
 {
     /**
+     * Tolerance property to compare radial distance.
+     * @var double
+     */
+    private $_tolerance = 0.0;
+
+    /**
      * Remove points with a distance under a given tolerance.
      *
      * @param double $tolerance Maximum radial distance between points.
@@ -55,13 +61,12 @@ class RadialDistance extends Abstraction
      */
     public function reduce( $tolerance )
     {
+        $this->_tolerance = $tolerance;
         $sentinelKey = 0;
         while ($sentinelKey < $this->count()-1) {
             $testKey = $sentinelKey + 1;
             while ( $sentinelKey < $this->count()-1
-                && $this->distanceBetweenPoints($this->points[$sentinelKey],
-                                                $this->points[$testKey]) < $tolerance )
-            {
+                && $this->_isInTolerance($sentinelKey, $testKey) ) {
                 unset($this->points[$testKey]);
                 $testKey++;
             }
@@ -69,5 +74,22 @@ class RadialDistance extends Abstraction
             $sentinelKey++;
         }
         return $this->reindex();
+    }
+
+    /**
+     * Helper method to ensure clean code.
+     *
+     * @param integer $basePointIndex    Sentinel point index.
+     * @param integer $subjectPointIndex Test point index.
+     *
+     * @return bool True if subject point is under tolerance, false otherwise.
+     */
+    private function _isInTolerance($basePointIndex, $subjectPointIndex)
+    {
+        $radius = $this->distanceBetweenPoints(
+            $this->points[$basePointIndex],
+            $this->points[$subjectPointIndex]
+        );
+        return $radius < $this->_tolerance;
     }
 }

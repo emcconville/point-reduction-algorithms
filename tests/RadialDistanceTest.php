@@ -33,6 +33,7 @@ class RadialDistanceTest extends PHPUnit_Framework_TestCase
      * @test
      * @covers PointReduction\Algorithms\Abstraction::setPoints
      * @covers PointReduction\Algorithms\RadialDistance::reduce
+     * @covers PointReduction\Algorithms\RadialDistance::_isInTolerance
      * @covers PointReduction\Algorithms\Abstraction::lastKey
      * @covers PointReduction\Algorithms\Abstraction::count
      *

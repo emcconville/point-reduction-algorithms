@@ -162,3 +162,46 @@ $reducedPoints = $reducer->reduce($threshold, $lookAhead);
 The original polygon of 2151 points has been reduced to 293.
 
 ![Lang example](http://emcconville.com/point-reduction-algorithms/examples/dayton_Lang.svg)
+
+### Zhao-Saalfeld
+
+Added in version `1.2.0`.
+
+```php
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\ZhaoSAalfeld;
+$givenPoints = array(
+    new Point(-84.158640, -39.822480),
+    new Point(-84.159250, -39.820120),
+    // ... and so one
+);
+$degree = 7;
+$lookAhead = 7;
+$reducer = new ZhaoSAalfeld($givenPoints);
+$reducedPoints = $reducer->reduce($degree, $lookAhead);
+```
+
+The original polygon of 2151 points has been reduced to 1493.
+
+![Zhao-Saalfeld example](http://emcconville.com/point-reduction-algorithms/examples/dayton_ZhaoSaalfeld.svg)
+
+### Radial Distance
+
+Added in version `1.2.0`.
+
+```php
+use PointReduction\Common\Point,
+    PointReduction\Algorithms\RadialDistance;
+$givenPoints = array(
+    new Point(-84.158640, -39.822480),
+    new Point(-84.159250, -39.820120),
+    // ... and so one
+);
+$tolerance = 0.0025;
+$reducer = new RadialDistance($givenPoints);
+$reducedPoints = $reducer->reduce($tolerance);
+```
+
+The original polygon of 2151 points has been reduced to 449.
+
+![Radial Distance example](http://emcconville.com/point-reduction-algorithms/examples/dayton_RadialDistance.svg)
